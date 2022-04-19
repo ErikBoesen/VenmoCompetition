@@ -5,3 +5,5 @@ function getAmounts() {
         console.log(json);
     });
 }
+getAmounts();
+setInterval(getAmounts, 500);
