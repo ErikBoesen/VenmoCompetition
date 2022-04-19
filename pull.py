@@ -37,7 +37,7 @@ def get_relevant_transactions():
 transactions = get_relevant_transactions()
 amounts = {artist: 0 for artist in ('amine', 'masego', 'japanese breakfast', 'sofi tukker')}
 for transaction in transactions:
-    artist = unidecode(transaction.note.lower())
+    artist = unidecode(transaction.note.lower().replace(' ', '_'))
     if artist in amounts:
         amounts[artist] += transaction.amount
 
