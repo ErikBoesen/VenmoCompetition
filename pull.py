@@ -41,5 +41,5 @@ for transaction in transactions:
     if artist in amounts:
         amounts[artist] += transaction.amount
 
-with open('totals.json', 'w') as f:
+with open('amounts.json', 'w') as f:
     json.dump(amounts, f)
