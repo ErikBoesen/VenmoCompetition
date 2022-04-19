@@ -2,7 +2,7 @@ from venmo_api import Client
 from getpass import getpass
 import json
 import datetime
-import unidecode
+from unidecode import unidecode
 
 """
 access_token = Client.get_access_token(username=input('Username: '),
@@ -18,7 +18,6 @@ client = Client(access_token=credentials['access_token'])
 
 me = client.user.get_my_profile()
 start_timestamp = int(datetime.datetime(2022, 4, 1).timestamp())
-amounts = {}
 
 def get_relevant_transactions():
     done = False
@@ -26,10 +25,6 @@ def get_relevant_transactions():
     transactions = client.user.get_user_transactions(user_id=me.id)
     while transactions:
         for transaction in transactions:
-            print(transaction.amount)
-            choice = transaction.note.lower()
-            print(choice)
-            print(transaction.date_completed)
             if transaction.date_completed < start_timestamp:
                 done = True
                 break
@@ -39,5 +34,12 @@ def get_relevant_transactions():
         transactions = transactions.get_next_page()
     return relevant_transactions
 
-relevant_transactions = get_relevant_transactions()
+transactions = get_relevant_transactions()
+amounts = {artist: 0 for artist in ('amine', 'masego', 'japanese breakfast', 'sofi tukker')}
+for transaction in transactions:
+    artist = unidecode(transaction.note.lower())
+    if artist in amounts:
+        amounts[artist] += transaction.amount
 
+with open('totals.json', 'w') as f:
+    json.dump(amounts, f)
