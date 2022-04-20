@@ -1,9 +1,11 @@
 function getAmounts() {
     fetch('/amounts.json').then(request => {
         return request.json()
-    }).then(json => {
-        console.log(json);
+    }).then(amounts => {
+        for (let artist in amounts) {
+            document.getElementById(artist).textContent = '$' + amounts[artist].toFixed(2);
+        }
     });
 }
 getAmounts();
-setInterval(getAmounts, 500);
+setInterval(getAmounts, 2000);
