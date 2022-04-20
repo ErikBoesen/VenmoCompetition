@@ -24,7 +24,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: 'Fugaz One';
+    font-family: 'Great Vibes';
     -webkit-font-smoothing: antialiased;
     color: white;
     animation: colors 30s infinite linear;
@@ -56,10 +56,16 @@ h2 {
     font-size: 30px;
 }
 .row {
-
+    margin: 20px 0;
 }
 .artist {
-    display: inline-block;
+    padding: 10px;
+}
+.artist:last-child {
+    border-right: none;
+}
+.amount {
+    font-size: 40px;
 }
 .button {
     margin-top: 10px;
@@ -74,4 +80,10 @@ h2 {
     outline: 0;
     font-weight: bold;
     text-decoration: none
+}
+@media (min-width: 700px) {
+    .artist {
+        display: inline-block;
+        border-right: dotted 2px white;
+    }
 }
