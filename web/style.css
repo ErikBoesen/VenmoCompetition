@@ -16,7 +16,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-html, body { height: 100%; }
+html, body { min-height: 100%; }
 body {
     background: #92e6db;
     display: flex;
@@ -68,7 +68,7 @@ h2 {
     font-size: 40px;
 }
 button, .button {
-    margin-top: 10px;
+    margin: 10px;
     font-family: 'Great Vibes';
     padding: 10px 30px 0px;
     border: solid 4px white;
