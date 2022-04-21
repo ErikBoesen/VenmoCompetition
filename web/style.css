@@ -67,7 +67,7 @@ h2 {
 .amount {
     font-size: 40px;
 }
-.button {
+button, .button {
     margin-top: 10px;
     font-family: 'Great Vibes';
     padding: 10px 30px 0px;

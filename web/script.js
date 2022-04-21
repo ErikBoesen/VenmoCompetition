@@ -1,5 +1,5 @@
 function getAmounts() {
-    fetch('/amounts.json').then(request => {
+    fetch('/artist_amounts.json').then(request => {
         return request.json()
     }).then(amounts => {
         for (let artist in amounts) {
