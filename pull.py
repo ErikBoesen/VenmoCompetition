@@ -1,15 +1,9 @@
 from venmo_api import Client
-from getpass import getpass
 import json
 import datetime
 from unidecode import unidecode
 import time
 
-"""
-access_token = Client.get_access_token(username=input('Username: '),
-                                        password=getpass())
-print("My token:", access_token)
-"""
 with open('credentials.json', 'r') as f:
     credentials = json.load(f)
 
@@ -37,15 +31,24 @@ def get_relevant_transactions():
 
 def get_amounts():
     transactions = get_relevant_transactions()
-    amounts = {artist: 0 for artist in ('amine', 'masego', 'japanese_breakfast', 'sofi_tukker')}
+    artist_amounts = {artist: 0 for artist in ('amine', 'masego', 'japanese_breakfast', 'sofi_tukker')}
+    user_amounts = {}
     for transaction in transactions:
         artist = unidecode(transaction.note.lower().replace(' ', '_'))
-        if artist in amounts:
-            amounts[artist] += transaction.amount
+        if artist in artist_amounts:
+            artist_amounts[artist] += transaction.amount
 
-    print(amounts)
-    with open('amounts.json', 'w') as f:
-        json.dump(amounts, f)
+            user = transaction.actor.display_name
+            if user not in user_amounts:
+                user_amounts[user] = 0
+            user_amounts[user] += transaction.amount
+
+    print(artist_amounts)
+    with open('web/artist_amounts.json', 'w') as f:
+        json.dump(artist_amounts, f)
+    print(user_amounts)
+    with open('web/user_amounts.json', 'w') as f:
+        json.dump(user_amounts, f)
 
 while True:
     get_amounts()
